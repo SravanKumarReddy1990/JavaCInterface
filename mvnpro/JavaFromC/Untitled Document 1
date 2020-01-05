@@ -1,0 +1,10 @@
+dependancy copy 
+
+mvn dependency:copy-dependencies -DoutputDirectory=dependancy
+
+
+java -cp ".:/home/ramu/javasamples/javacpro/mvnpro/JavaFromC/dependancy/*:/home/ramu/javasamples/javacpro/mvnpro/JavaFromC/target/JavaFromC-1.0-SNAPSHOT.jar" com.server.jfromc.scalaberniClient
+
+java -cp ".:/home/ramu/javasamples/javacpro/mvnpro/JavaFromC/dependancy/*:/home/ramu/javasamples/javacpro/mvnpro/JavaFromC/target/JavaFromC-1.0-SNAPSHOT.jar" com.server.jfromc.scalaberniServer
+
+java execute cmd 

@@ -1,6 +1,6 @@
 public class helloWorld{
-	public static void main(String[] args){
-		System.out.println("Hello, World");
+	public static void main(String args){
+		System.out.println(args+" Hello, World "+args);
 	}
 	public static int square(int input){
 		int output = input * input;

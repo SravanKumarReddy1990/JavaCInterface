@@ -14,6 +14,8 @@ http://java.sun.com/developer/onlineTraining/Programming/JDCBook/jniexamp.html
 
 #include <stdio.h>
 #include <jni.h>
+#include <stdlib.h>
+#include <string.h>
 
 JNIEnv* create_vm(JavaVM **jvm)
 {
@@ -42,11 +44,17 @@ void invoke_class(JNIEnv* env)
     jmethodID power_method;
     jint number=20;
     jint exponent=3;
+
     hello_world_class = env->FindClass("helloWorld");
-    main_method = env->GetStaticMethodID( hello_world_class, "main", "([Ljava/lang/String;)V");
+    main_method = env->GetStaticMethodID( hello_world_class, "main", "(Ljava/lang/String;)V");
     square_method = env->GetStaticMethodID( hello_world_class, "square", "(I)I");
     power_method = env->GetStaticMethodID( hello_world_class, "power", "(II)I");
-    env->CallStaticVoidMethod( hello_world_class, main_method, NULL);
+
+char *buf = (char*)malloc(60);
+strcpy(buf, "{\"myname\",\"yourname\",\"hisname\"}"); 
+jstring jstrBuf = env->NewStringUTF( buf);
+
+    env->CallStaticVoidMethod( hello_world_class, main_method, jstrBuf);
     printf("%d squared is %d\n", number,
         env->CallStaticIntMethod( hello_world_class, square_method, number));
     printf("%d raised to the %d power is %d\n", number, exponent,

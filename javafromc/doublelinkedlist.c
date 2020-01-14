@@ -20,6 +20,7 @@ void nodeInsetail(struct Node **head,
 { 
 
 	struct Node *p; 
+	struct Node *temp; 
 	p->info = key; 
 	p->next = NULL; 
 

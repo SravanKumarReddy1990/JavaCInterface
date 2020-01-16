@@ -29,7 +29,12 @@ import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import org.apache.log4j.Logger;
-
+import javax.swing.JTextField;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import net.isetjb.client.scalaberniClient;
 /**
  * Frame1 class.
  *
@@ -39,7 +44,9 @@ public class Frame1 extends JInternalFrame
 {
     final static Logger log = Logger.getLogger(Frame1.class);
 
-    JButton jButton1 = new JButton(" Test >> ");
+    JButton jButton1 = new JButton(" Login >> ");
+  private JTextField idTextField = new JTextField(25);
+  private JTextField passTextField = new JTextField(25);
 
     /**
      * Constructor.
@@ -50,7 +57,7 @@ public class Frame1 extends JInternalFrame
 
         setTitle(I18N.lang("frame1.title"));
         setLocation(new Random().nextInt(120) + 10, new Random().nextInt(120) + 10);
-        setSize(550, 350);
+        setSize(700, 500);
 
         setClosable(true);
         setIconifiable(true);
@@ -58,9 +65,28 @@ public class Frame1 extends JInternalFrame
         setResizable(false);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
+    JPanel buttonPanel = new JPanel();
+    buttonPanel.add(idTextField);
+    buttonPanel.add(passTextField);
+    buttonPanel.add(jButton1);
+    jButton1.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ev)
+            {
+                log.debug("ActionEvent on " + ev.getActionCommand());
+		scalaberniClient scalaberniclient=new scalaberniClient();
+		String id=(String)idTextField.getText();
+		String password=(String)passTextField.getText();
+		System.out.println("Frame 1 class  "+id+" ----- "+password);
+		scalaberniclient.callServer(id,password);
+            }
+        });
+
+
         //add compnent to the frame :
-        getContentPane().setLayout(new FlowLayout(FlowLayout.LEFT));
-        getContentPane().add(jButton1);
+        getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
+        //getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(buttonPanel,BorderLayout.NORTH);
 
         setVisible(false);
 

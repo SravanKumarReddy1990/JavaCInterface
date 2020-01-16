@@ -37,29 +37,29 @@ import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import org.apache.log4j.Logger;
 
+
+
 /**
  * Desktop class.
  *
  * @author Nafaa Friaa (nafaa.friaa@isetjb.rnu.tn)
  */
-public class Desktop extends JFrame
+public class Desktop extends JFrame 
 {
 
     final static Logger log = Logger.getLogger(Desktop.class);
-
     JDesktopPane jDesktopPane = new JDesktopPane();
     JLabel jLabelFooterState = new JLabel(I18N.lang("desktop.jLabelFooterState") + System.getProperty("os.name"));
-
     // internal frames :
     FrameAbout frameAbout = new FrameAbout();
     Frame1 frame1 = new Frame1();
-
     // menu :
     MenuBar menuBar = new MenuBar();
-
     /**
      * Constructor.
      */
+
+
     public Desktop()
     {
         log.debug("START constructor...");
@@ -79,6 +79,7 @@ public class Desktop extends JFrame
 
         // add the menu bar :
         setJMenuBar(menuBar);
+
 
         // menu listeners :
         // jMenuItemQuit :
@@ -109,8 +110,20 @@ public class Desktop extends JFrame
             public void actionPerformed(ActionEvent ev)
             {
                 log.debug("ActionEvent on " + ev.getActionCommand());
-
+		
                 frame1.setVisible(true);
+//		displayEditorPane.setVisible(false);
+		
+            }
+        });
+   	menuBar.jMenuItemWebview.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ev)
+            {
+                log.debug("ActionEvent on " + ev.getActionCommand());
+//		displayEditorPane.setVisible(true);
+                frame1.setVisible(false);
+
             }
         });
 
@@ -133,7 +146,6 @@ public class Desktop extends JFrame
 
         log.debug("End of constructor.");
     }
-
     /**
      * Show confirm dialog before closing the window.
      *

@@ -1,10 +1,15 @@
 net/isetjb/Desktop$2.class
 net/isetjb/Application.class
+net/isetjb/qrcode/WordDocumentApp.class
 net/isetjb/Desktop$1.class
 net/isetjb/Desktop$3.class
 net/isetjb/Frame1.class
+net/isetjb/postgres/Login.class
+net/isetjb/client/scalaberniClient.class
 net/isetjb/config/PROP.class
 net/isetjb/config/I18N.class
 net/isetjb/Desktop.class
+net/isetjb/Frame1$1.class
 net/isetjb/MenuBar.class
+net/isetjb/Desktop$4.class
 net/isetjb/FrameAbout.class

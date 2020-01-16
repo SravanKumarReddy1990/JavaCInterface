@@ -44,6 +44,7 @@ public class MenuBar extends JMenuBar
     // file :
     JMenu jMenuFile = new JMenu(I18N.lang("menubar.jMenuFile"));
     JMenuItem jMenuItemFrame1 = new JMenuItem(I18N.lang("menubar.jMenuItemFrame1"));
+    JMenuItem jMenuItemWebview = new JMenuItem(I18N.lang("menubar.jMenuItemWebview"));
     JMenuItem jMenuItemQuit = new JMenuItem(I18N.lang("menubar.jMenuItemQuit"));
 
     // help :
@@ -64,6 +65,8 @@ public class MenuBar extends JMenuBar
         jMenuItemFrame1.setAccelerator(KeyStroke.getKeyStroke('R', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         jMenuFile.add(jMenuItemFrame1);
 
+        jMenuItemWebview.setAccelerator(KeyStroke.getKeyStroke('W', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        jMenuFile.add(jMenuItemWebview);
         jMenuFile.addSeparator();
 
         jMenuItemQuit.setAccelerator(KeyStroke.getKeyStroke('Q', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));

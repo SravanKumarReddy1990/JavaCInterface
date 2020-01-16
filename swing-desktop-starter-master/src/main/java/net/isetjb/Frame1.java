@@ -26,15 +26,15 @@ package net.isetjb;
 import net.isetjb.config.I18N;
 import java.awt.FlowLayout;
 import java.util.Random;
-import javax.swing.JButton;
-import javax.swing.JInternalFrame;
 import org.apache.log4j.Logger;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import net.isetjb.client.scalaberniClient;
+import javax.swing.filechooser.*;
+import java.io.*; 
 /**
  * Frame1 class.
  *
@@ -45,6 +45,7 @@ public class Frame1 extends JInternalFrame
     final static Logger log = Logger.getLogger(Frame1.class);
 
     JButton jButton1 = new JButton(" Login >> ");
+    JButton jButtonopen = new JButton(" Open ");
   private JTextField idTextField = new JTextField(25);
   private JTextField passTextField = new JTextField(25);
 
@@ -57,7 +58,7 @@ public class Frame1 extends JInternalFrame
 
         setTitle(I18N.lang("frame1.title"));
         setLocation(new Random().nextInt(120) + 10, new Random().nextInt(120) + 10);
-        setSize(700, 500);
+        setSize(800, 500);
 
         setClosable(true);
         setIconifiable(true);
@@ -69,6 +70,7 @@ public class Frame1 extends JInternalFrame
     buttonPanel.add(idTextField);
     buttonPanel.add(passTextField);
     buttonPanel.add(jButton1);
+	buttonPanel.add(jButtonopen);
     jButton1.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent ev)
@@ -81,7 +83,38 @@ public class Frame1 extends JInternalFrame
 		scalaberniclient.callServer(id,password);
             }
         });
-
+        jButtonopen.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ev)
+            {
+                 // create an object of JFileChooser class 
+            JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory()); 
+  
+            // allow multiple file selection 
+            j.setMultiSelectionEnabled(true); 
+  
+            // invoke the showsOpenDialog function to show the save dialog 
+            int r = j.showOpenDialog(null); 
+  
+            if (r == JFileChooser.APPROVE_OPTION) { 
+                // get the selelcted files 
+                File files[] = j.getSelectedFiles(); 
+  
+                // set text to blank 
+               // l.setText(""); 
+  
+                int t = 0; 
+                // set the label to the path of the selected files 
+                while (t++ < files.length) {
+                    System.out.println( " " + files[t - 1].getName()); 
+		}
+            } 
+            // if the user cancelled the operation 
+            else{
+               // l.setText("the user cancelled the operation");
+		}
+            }
+        });
 
         //add compnent to the frame :
         getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));

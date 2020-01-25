@@ -35,6 +35,9 @@ import java.awt.event.ActionListener;
 import net.isetjb.client.scalaberniClient;
 import javax.swing.filechooser.*;
 import java.io.*; 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 /**
  * Frame1 class.
  *
@@ -46,6 +49,9 @@ public class Frame1 extends JInternalFrame
 
     JButton jButton1 = new JButton(" Login >> ");
     JButton jButtonopen = new JButton(" Open ");
+    JButton jButton1s = new JButton(" Login >> ");
+    JButton jButtonopens = new JButton(" Open ");
+
   private JTextField idTextField = new JTextField(25);
   private JTextField passTextField = new JTextField(25);
 
@@ -70,7 +76,16 @@ public class Frame1 extends JInternalFrame
     buttonPanel.add(idTextField);
     buttonPanel.add(passTextField);
     buttonPanel.add(jButton1);
-	buttonPanel.add(jButtonopen);
+    buttonPanel.add(jButtonopen);
+    getContentPane().setLayout(new BorderLayout());
+    getContentPane().add(buttonPanel,BorderLayout.EAST);
+
+    JPanel buttonPanelsecond = new JPanel();
+    buttonPanelsecond.add(jButton1s);
+    buttonPanelsecond.add(jButtonopens);
+    getContentPane().add(buttonPanelsecond,BorderLayout.BEFORE_FIRST_LINE);
+
+
     jButton1.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent ev)
@@ -79,8 +94,12 @@ public class Frame1 extends JInternalFrame
 		scalaberniClient scalaberniclient=new scalaberniClient();
 		String id=(String)idTextField.getText();
 		String password=(String)passTextField.getText();
+		JSONObject obj = new JSONObject();
+            	obj.put("userid",id);
+            	obj.put("password",password );
+            	obj.put("opp","login" );
 		System.out.println("Frame 1 class  "+id+" ----- "+password);
-		scalaberniclient.callServer(id,password);
+		scalaberniclient.callServer(obj);
             }
         });
         jButtonopen.addActionListener(new ActionListener()
@@ -117,9 +136,9 @@ public class Frame1 extends JInternalFrame
         });
 
         //add compnent to the frame :
-        getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
+        //getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
         //getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(buttonPanel,BorderLayout.NORTH);
+        //getContentPane().add(buttonPanel,BorderLayout.NORTH);
 
         setVisible(false);
 

@@ -1,0 +1,5 @@
+gcc -Wall -Wextra -g foo.c -o fooprog
+
+
+gcc -shared -o main.so main.o
+

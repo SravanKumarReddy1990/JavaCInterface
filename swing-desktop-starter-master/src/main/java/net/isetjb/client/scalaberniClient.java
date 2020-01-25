@@ -2,13 +2,16 @@ package net.isetjb.client;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.io.*;
 import java.net.Socket;
 import java.util.*;
 import java.util.Base64;
-import net.isetjb.postgres.Login;
+//import net.isetjb.postgres.Login;
+import java.io.*;
+
 
 public class scalaberniClient  {
 
@@ -16,15 +19,15 @@ public class scalaberniClient  {
         return Base64.getEncoder().encodeToString(imageByteArray);
     }
 
-     public static void callServer(String id,String password) {
-		System.out.println("client class "+id+" ----- "+password);
+     public static void callServer(JSONObject obj) { 
+		//System.out.println("client class "+id+" ----- "+password);
 
          //the file to convert is in the same folder as the source code
         File file = new File("/home/ramu/Downloads/PS7-12.png");
 
         try {            
-	Login login=new Login();
-	login.login(id,password);
+	//Login login=new Login();
+	//login.login(obj);
 
             //Image conversion to byte array
             FileInputStream imageInFile = new FileInputStream(file);
@@ -37,12 +40,12 @@ public class scalaberniClient  {
             System.out.println("Image Successfully Manipulated!");
 
             //the object that will be send to Server
-            JSONObject obj = new JSONObject();
+            //JSONObject obj = new JSONObject();
 
             //name of the image
-            obj.put("filename","newImage.png");
+            //obj.put("filename","newImage.png");
             //string obteined by the conversion of the image
-            obj.put("image",imageDataString );
+            //obj.put("image",imageDataString );
 
             //connection to erver
             Socket clientSocket= new Socket ("localhost", 7777);
@@ -52,6 +55,9 @@ public class scalaberniClient  {
             outToServer.writeBytes(obj.toJSONString());
             System.out.println("File Sent!");
             
+ 		
+		
+		
             //closing connection
             clientSocket.close();
 

@@ -1,15 +1,13 @@
 package com.server.jfromc;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import com.server.jfromc.postgres.Login;
 
 
 public class scalaberniServer {
@@ -33,6 +31,14 @@ public class scalaberniServer {
                 System.out.println("File Received!");
                 String message = org.apache.commons.io.IOUtils.toString(inFromClient);
                 JSONObject obj1 = (JSONObject) JSONValue.parse(message);
+		String opp=obj1.get("opp").toString();
+		if(opp.equals("login")){
+			Login login=new Login();
+			JSONObject res=login.login(obj1);
+		
+	
+
+		}else{
                 String name = obj1.get("filename").toString();
                 String image = obj1.get("image").toString();      
 
@@ -44,6 +50,7 @@ public class scalaberniServer {
                 imageOutFile.write(imageByteArray);
                 imageOutFile.close();
                 System.out.println("Image Successfully Manipulated!");
+		}
             } 
             catch (FileNotFoundException e) {
             } 
